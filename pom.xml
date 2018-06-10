@@ -93,6 +93,7 @@
     </dependencies>
 	
 	<build>
+		<finalName>smm-producers-consumers-generator</finalName>
         <plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
