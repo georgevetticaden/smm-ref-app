@@ -19,7 +19,7 @@ createConsumersForTruckGeoAvro() {
 createStringConumer() {
 
 	nohup java -cp \
-		smm-ref-app-jar-with-dependencies.jar \
+		../../smm-producers-consumers-generator-jar-with-dependencies.jar \
 		hortonworks.hdf.smm.refapp.consumer.impl.LoggerStringEventConsumer \
 		$kafkaBrokers \
 		$schemaRegistryUrl \
