@@ -81,7 +81,7 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
 				}
 				
 				
-				// `enable.auto.commit` set to true. coordinator automatically commits the offsets
+				// `enable.auto.commit` set to true by default which means consumers will commit based on configured interval so client doesn't ahve to commit
 				// returned on the last poll(long) for all the subscribed list of topics and partitions
 			}
 		} catch (WakeupException e) {
@@ -121,29 +121,15 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
 		props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, result.getString("max.partition.fetch.bytes"));
 
 		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
-		configureDeserializers(props, result);
+		
+		 // key deserializer
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());	
+        //value deserializer
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 		
 		return props;
 	}
 
-	private static void configureDeserializers(Properties props, Namespace result) {
-        // key deserializer
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-
-        // schema registry config
-        props.putAll(Collections.singletonMap(SchemaRegistryClient.Configuration.SCHEMA_REGISTRY_URL.name(), result.getString("schema.registry.url")));
-
-        // configure reader versions for topics to be consumed.
-//        Map<String, Integer> readerVersions = new HashMap<>();
-//        readerVersions.put("clicks", 2);
-//        readerVersions.put("users", 1);
-//        props.put(KafkaAvroDeserializer.READER_VERSIONS, readerVersions);
-
-        // value deserializer
-        // current props are passed to KafkaAvroDeserializer instance by invoking #configure(Map, boolean) method.
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
-		
-	}
 
 	/**
 	 * Get the command-line argument parser.
