@@ -2,12 +2,13 @@
 
 export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
 export PATH=$PATH:$JAVA_HOME/bin
-export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
-export schemaRegistryUrl=http://a-summit3.field.hortonworks.com:7788/api/v1
+export kafkaBrokers="b-summit11.field.hortonworks.com:6667,b-summit12.field.hortonworks.com:6667,b-summit13.field.hortonworks.com:6667,b-summit14.field.hortonworks.com:6667,b-summit15.field.hortonworks.com:6667"
+export schemaRegistryUrl=http://b-summit3.field.hortonworks.com:7788/api/v1
+export MICRO_ALERT_SERVICE_PRODUCER_JAR=smm-producers-consumers-generator-jar-with-dependencies.jar
 
 createStringConsumer() {
          java -cp \
-                ../../smm-producers-consumers-generator-jar-with-dependencies.jar \
+                $MICRO_ALERT_SERVICE_PRODUCER_JAR \
                 hortonworks.hdf.smm.refapp.consumer.impl.LoggerStringEventConsumer \
                 --bootstrap.servers $kafkaBrokers \
                 --schema.registry.url $schemaRegistryUrl \
