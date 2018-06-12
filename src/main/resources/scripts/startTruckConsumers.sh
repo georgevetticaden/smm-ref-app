@@ -58,6 +58,27 @@ createFlinkStreamingConsumerForTruckGeoAvro() {
 
 }
 
+
+
+createMicroServiceConsumers() {
+
+	
+	topics=(route-planning load-optimization fuel-logistics supply-chain predictive-alerts energy-mgmt audit-events compliance adjudication approval)
+	services=(route load-optimizer fuel supply-chain predictive energy audit compliance adjudication approval)
+	i=0
+	for topic in "${topics[@]}"
+	do
+    	topicName=$topic
+        groupId=${services[i]}-micro-service
+        clientId=consumer-1;
+        logFile=$groupId-$clientId.out;
+        createStringConsumer $topicName $groupId $clientId $logFile
+        i=$((i+1))
+	done  	
+	
+}
+
 createKafkaStreamsConsumerForTruckGeoAvro
 createSparkStreamingConsumerForTruckGeoAvro;
 createFlinkStreamingConsumerForTruckGeoAvro;
+createMicroServiceConsumers;
