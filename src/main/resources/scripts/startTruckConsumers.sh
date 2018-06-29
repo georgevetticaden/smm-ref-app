@@ -19,7 +19,7 @@ createStringConsumer() {
                 hortonworks.hdf.smm.refapp.consumer.impl.LoggerStringEventConsumer \
                 --bootstrap.servers $kafkaBrokers \
                 --schema.registry.url $schemaRegistryUrl \
-                --security.protocol $securityProtocol
+                --security.protocol $securityProtocol \
                 --topics $1 \
                 --groupId $2 \
                 --clientId $3 \
@@ -32,7 +32,7 @@ createAvroConsumer() {
                 hortonworks.hdf.smm.refapp.consumer.impl.LoggerAvroEventConsumer \
                 --bootstrap.servers $kafkaBrokers \
                 --schema.registry.url $schemaRegistryUrl \
-                --security.protocol $securityProtocol
+                --security.protocol $securityProtocol \
                 --topics $1 \
                 --groupId $2 \
                 --clientId $3 \
