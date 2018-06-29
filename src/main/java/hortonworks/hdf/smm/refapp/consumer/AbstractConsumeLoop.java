@@ -15,6 +15,7 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -126,6 +127,13 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());	
         //value deserializer
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        
+        
+        /* If talking to secure Kafka cluster, set security protocol as "SASL_PLAINTEXT */
+        if("SASL_PLAINTEXT".equals(result.getString("security.protocol"))) {
+		 	props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");  
+		 	props.put("sasl.kerberos.service.name", "kafka");        	
+        }
 		
 		return props;
 	}
@@ -177,6 +185,12 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
 				.setDefault("1024")
 				.type(String.class)
 				.help("The maximum amount of data per-partition the server will return");
+		
+		parser.addArgument("--security.protocol").action(store())
+				.required(false)
+				.setDefault("PLAINTEXT")
+				.type(String.class)
+				.help("Either PLAINTEXT or SASL_PLAINTEXT");
 		
 
 
