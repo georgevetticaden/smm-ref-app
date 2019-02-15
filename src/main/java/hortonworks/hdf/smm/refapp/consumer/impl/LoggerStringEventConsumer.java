@@ -36,7 +36,7 @@ public class LoggerStringEventConsumer extends AbstractConsumeLoop<String, Gener
 		
 		logger.info("C : {}, Record received partition : {}, key : {}, value : {}, offset : {}",
 				clientId, record.partition(), record.key(), record.value(), record.offset());
-		sleep(5000);
+		//sleep(5000);
 		
 	}
 
