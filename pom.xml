@@ -6,11 +6,12 @@
   	<version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <kafka.version>1.0.1.3.0.0.0-1634</kafka.version>
+        <kafka.version>2.1.0.3.4.1.0-5</kafka.version>
         <kafka.scala.version>2.11</kafka.scala.version>
         <log4j2.version>2.6.2</log4j2.version>
         <schema.registry.version>0.5.2.3.2.0.0-489</schema.registry.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <smm.interceptors.version>2.0.0.2.0.0.0-15</smm.interceptors.version>
     </properties>
 
     <dependencies>
@@ -89,6 +90,13 @@
 	    	<artifactId>guava</artifactId>
 	    	<version>19.0</version>
         </dependency>
+        
+        <!-- Libraries for SMM End to End Latency Interceptors -->	
+		<dependency>
+			<groupId>com.hortonworks.smm</groupId>
+		    <artifactId>monitoring-interceptors</artifactId>
+		    <version>${smm.interceptors.version}</version>
+		</dependency>      
         
     </dependencies>
 	
