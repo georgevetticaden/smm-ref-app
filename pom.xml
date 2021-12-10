@@ -8,7 +8,7 @@
     <properties>
         <kafka.version>2.1.0.3.4.1.0-5</kafka.version>
         <kafka.scala.version>2.11</kafka.scala.version>
-        <log4j2.version>2.6.2</log4j2.version>
+        <log4j2.version>2.15.0</log4j2.version>
         <schema.registry.version>0.5.2.3.2.0.0-489</schema.registry.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <smm.interceptors.version>2.0.0.2.0.0.0-15</smm.interceptors.version>
